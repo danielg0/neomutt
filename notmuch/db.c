@@ -102,11 +102,28 @@ notmuch_database_t *nm_db_do_open(const char *filename, bool writable, bool verb
   do
   {
 #if LIBNOTMUCH_CHECK_VERSION(5, 4, 0)
-    // notmuch 0.32-0.32.2 didn't bump libnotmuch version to 5.4.
-    st = notmuch_database_open_with_config(filename, mode, NULL, NULL, &db, &msg);
-    if (st == NOTMUCH_STATUS_NO_CONFIG)
+    const char *config_to_use = NULL;
+    const char *nm_config_file = cs_subset_path(NeoMutt->sub, "nm_config_file");
+
+    // Workaround the configuration system mapping "" to NULL.
+    if (nm_config_file == NULL)
     {
-      mutt_debug(LL_DEBUG1, "nm: Could not find a Notmuch configuration file\n");
+      config_to_use = "";
+    }
+    else if (!mutt_strn_equal(nm_config_file, "auto", 4))
+    {
+      config_to_use = nm_config_file;
+    }
+
+    // notmuch 0.32-0.32.2 didn't bump libnotmuch version to 5.4.
+    st = notmuch_database_open_with_config(filename, mode, config_to_use, NULL, &db, &msg);
+
+    // Attempt opening database without configuration file. Don't if the user specified no config.
+    if (st == NOTMUCH_STATUS_NO_CONFIG && !mutt_str_equal(config_to_use, ""))
+    {
+      mutt_debug(LL_DEBUG1, "nm: Could not find notmuch configuration file: %s\n", nm_config_file);
+      mutt_debug(LL_DEBUG1, "nm: Attempting to open notmuch db without configuration file.\n");
+
       FREE(&msg);
 
       st = notmuch_database_open_with_config(filename, mode, "", NULL, &db, &msg);
