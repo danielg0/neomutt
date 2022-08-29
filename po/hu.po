@@ -1649,12 +1649,12 @@ msgstr "Érvénytelen rendezés típus: %ld"
 #: conn/accountcmd.c:79
 #, c-format
 msgid "Line is malformed: expected <key: val>, got <%s>"
-msgstr ""
+msgstr "Sort rosszul formázták: várt <key: val>, kapott <%s>"
 
 #: conn/accountcmd.c:119
 #, c-format
 msgid "Unhandled key in line <%s: %s>"
-msgstr ""
+msgstr "Nem-kezelt kulcs a következő sorban <%s: %s>"
 
 #: conn/accountcmd.c:140
 #, fuzzy
@@ -7230,7 +7230,7 @@ msgstr "%s többé nem létezik"
 #: send/config.c:99
 #, c-format
 msgid "Option %s must not contain shell metacharacters: %c"
-msgstr ""
+msgstr "%s opció net tartalmazhatja a %c metakaraktereket."
 
 #: send/send.c:339
 msgid "No subject, abort?"
