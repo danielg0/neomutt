@@ -1657,9 +1657,8 @@ msgid "Unhandled key in line <%s: %s>"
 msgstr "Nem-kezelt kulcs a következő sorban <%s: %s>"
 
 #: conn/accountcmd.c:140
-#, fuzzy
 msgid "Unable to run account command"
-msgstr "Nem tudom a frissítés parancsot futtatni"
+msgstr "Nem tudom a fiók parancsot futtatni"
 
 #. L10N: Example: Username at myhost.com
 #: conn/connaccount.c:78
@@ -5767,9 +5766,8 @@ msgid "delete chars from the cursor to the end of the word"
 msgstr "karakterek törlése a szó végéig"
 
 #: opcodes.h:140
-#, fuzzy
 msgid "delete chars from cursor to beginning the line"
-msgstr "karakterek törlése a sor végéig"
+msgstr "karakterek törlése a kurzortól a sor elejéig"
 
 #: opcodes.h:141
 msgid "delete all chars on the line"
